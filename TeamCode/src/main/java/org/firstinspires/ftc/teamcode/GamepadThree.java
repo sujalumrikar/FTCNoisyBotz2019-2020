@@ -113,6 +113,7 @@ public class GamepadThree extends LinearOpMode {
 
             boolean turningAround = false;
             boolean slowMode = false;
+
             float turnSpeed = 1;
             double speed = 1;
 
