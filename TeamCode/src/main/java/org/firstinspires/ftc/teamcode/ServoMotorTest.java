@@ -1,32 +1,3 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -55,17 +26,21 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="GamepadThree", group="Linear Opmode")
+@TeleOp(name="ServoMotorTest", group="Linear Opmode")
 //@Disabled
-public class GamepadThree extends LinearOpMode {
+
+public class ServoMotorTest extends LinearOpMode{
+
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     //private DcMotor leftDrive = null;
     //private DcMotor rightDrive = null;
 
-    DcMotor leftDrive_1;
-    DcMotor rightDrive_1;
+    //commented out all the motor because this is a servo motor test program
+
+    //DcMotor leftDrive_1;
+    //DcMotor rightDrive_1;
     //DcMotor leftDrive_2;
     //DcMotor rightDrive_2;
 
@@ -74,12 +49,15 @@ public class GamepadThree extends LinearOpMode {
     Servo servoMotor_3;
     DistanceSensor sensorRange;
     ColorSensor colorSensor;
+    int servoMotorUnoPos = 90;
+    int servoMotorDosPos = 90;
+    int servoMotorTresPos = 90;
 
     long mLastBeepMS = System.currentTimeMillis();
     long mGapMS = 1000;
 
-    long getSleepDurationMS(int distanceCM){
-        return (long) (distanceCM*distanceCM/40);
+    long getSleepDurationMS(int distanceCM) {
+        return (long) (distanceCM * distanceCM / 40);
     }
 
     ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
@@ -90,21 +68,21 @@ public class GamepadThree extends LinearOpMode {
         telemetry.update();
 
         //Commented out the second drives since we're not using mechanum wheels right now
-        leftDrive_1  = hardwareMap.dcMotor.get("leftDrive_1");
-        rightDrive_1  = hardwareMap.dcMotor.get("rightDrive_1");
+        //leftDrive_1 = hardwareMap.dcMotor.get("leftDrive_1");
+        //rightDrive_1 = hardwareMap.dcMotor.get("rightDrive_1");
         //leftDrive_2  = hardwareMap.dcMotor.get("leftDrive_2");
         //rightDrive_2 = hardwareMap.dcMotor.get("rightDrive_2");
 
 
         servoMotor_1 = hardwareMap.servo.get("servo_motor_one");
-        servoMotor_2 =  hardwareMap.servo.get("servo_motor_two");
-        servoMotor_3 =  hardwareMap.servo.get("servo_motor_three");
+        servoMotor_2 = hardwareMap.servo.get("servo_motor_two");
+        servoMotor_3 = hardwareMap.servo.get("servo_motor_three");
         sensorRange = hardwareMap.get(DistanceSensor.class, "distance_sensor");
         colorSensor = hardwareMap.get(ColorSensor.class, "color_sensor");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftDrive_1.setDirection(DcMotor.Direction.REVERSE);
+        //leftDrive_1.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -127,114 +105,124 @@ public class GamepadThree extends LinearOpMode {
             telemetry.addData("Red", "Red:" + colorSensor.red());
             telemetry.addData("Blue", "Blue:" + colorSensor.blue());
             telemetry.addData("Green", "Green:" + colorSensor.green());
+            telemetry.addData("ServoMotor1", "Servo1Pos:" + servoMotorUnoPos);
+            telemetry.addData("ServoMotor1", "Servo1Pos:" + servoMotorDosPos);
+            telemetry.addData("ServoMotor1", "Servo1Pos:" + servoMotorTresPos);
             telemetry.update();
 
-            if(turningAround == false) {
-                leftDrive_1.setPower((-gamepad1.left_stick_y) / 2);
-                rightDrive_1.setPower((-gamepad1.right_stick_y) / 2);
+            if (turningAround == false) {
+                //leftDrive_1.setPower((-gamepad1.left_stick_y) / 2);
+                //rightDrive_1.setPower((-gamepad1.right_stick_y) / 2);
                 //leftDrive_2.setPower((-gamepad1.left_stick_y) / 2);
                 //rightDrive_2.setPower((-gamepad1.right_stick_y) / 2);
 
 
-            } else if(turningAround == true) {
-                leftDrive_1.setPower((turnSpeed) / 1.25);
-                rightDrive_1.setPower((-turnSpeed) / 1.25);
+            } else if (turningAround == true) {
+                //leftDrive_1.setPower((turnSpeed) / 1.25);
+                //rightDrive_1.setPower((-turnSpeed) / 1.25);
                 //leftDrive_2.setPower((turnSpeed) / 1.25);
                 //rightDrive_2.setPower((-turnSpeed) / 1.25);
             }
 
-            if (gamepad2.a == true) {
-                servoMotor_1.setPosition(180);
+            servoMotor_1.setPosition(-90);
+            servoMotor_2.setPosition(-90);
+            servoMotor_3.setPosition(-90);
+
+            while (gamepad2.a == true) {
+                servoMotor_1.setPosition(servoMotorUnoPos + 5);
             }
-            if (gamepad2.b == true) {
-                servoMotor_1.setPosition(0);
+            while (gamepad2.b == true) {
+                servoMotor_1.setPosition(servoMotorUnoPos - 5);
+                if(servoMotorUnoPos > -45){
+                    servoMotorUnoPos = -45;
+                }
             }
-            if (gamepad2.x == true) {
-                servoMotor_2.setPosition(180);
+            while (gamepad2.x == true) {
+                servoMotor_2.setPosition(servoMotorDosPos + 5);
             }
-            if (gamepad2.y == true) {
-                servoMotor_2.setPosition(0);
+            while (gamepad2.y == true) {
+                servoMotor_2.setPosition(servoMotorDosPos - 5);
             }
-            if (gamepad2.right_bumper == true) {
-                servoMotor_3.setPosition(180);
+            while (gamepad2.right_bumper == true) {
+                servoMotor_3.setPosition(servoMotorTresPos + 5);
             }
-            if (gamepad2.left_bumper == true ) {
-                servoMotor_3.setPosition(0);
+            while (gamepad2.left_bumper == true) {
+                servoMotor_3.setPosition(servoMotorTresPos - 5);
             }
 
-            if(gamepad1.x == true) {
-                if(slowMode == false) {
+            if (gamepad1.x == true) {
+                if (slowMode == false) {
                     slowMode = true;
-                } else if(slowMode == true) slowMode = false;
+                } else if (slowMode == true) slowMode = false;
                 sleep(100);
             }
 
-            if(slowMode==true){
-                speed=.2;
-            } else if (slowMode==false){
+            if (slowMode == true) {
+                speed = .2;
+            } else if (slowMode == false) {
                 speed = 1;
             }
 
             //turbo boost
-            while(gamepad1.right_bumper == true && gamepad1.left_bumper == true && turningAround == false) {
-                leftDrive_1.setPower(-gamepad1.left_stick_y);
-                rightDrive_1.setPower(-gamepad1.right_stick_y);
+            while (gamepad1.right_bumper == true && gamepad1.left_bumper == true && turningAround == false) {
+                //leftDrive_1.setPower(-gamepad1.left_stick_y);
+                //rightDrive_1.setPower(-gamepad1.right_stick_y);
                 //leftDrive_2.setPower(-gamepad1.left_stick_y);
                 //rightDrive_2.setPower(-gamepad1.right_stick_y);
 
 
             }
 
-            while(gamepad1.dpad_up) {
-                leftDrive_1.setPower(speed);
+            while (gamepad1.dpad_up) {
+                //leftDrive_1.setPower(speed);
                 //leftDrive_2.setPower(1);
-                rightDrive_1.setPower(speed);
+                //rightDrive_1.setPower(speed);
                 //rightDrive_2.setPower(1);
             }
 
-            while(gamepad1.dpad_down) {
-                leftDrive_1.setPower(-speed);
-                rightDrive_1.setPower(-speed);
+            while (gamepad1.dpad_down) {
+                //leftDrive_1.setPower(-speed);
+                //rightDrive_1.setPower(-speed);
                 //leftDrive_2.setPower(-1);
                 //rightDrive_2.setPower(-1);
             }
 
-            while(gamepad1.dpad_left == true && turningAround == false) {
-                leftDrive_1.setPower(-speed*.8);
+            while (gamepad1.dpad_left == true && turningAround == false) {
+                //leftDrive_1.setPower(-speed * .8);
                 //leftDrive_2.setPower(0.8);
-                rightDrive_1.setPower(speed*.8);
+                //rightDrive_1.setPower(speed * .8);
                 //rightDrive_2.setPower(-0.8);
             }
 
-            while(gamepad1.dpad_right == true && turningAround == false) {
-                leftDrive_1.setPower(speed*.8);
+            while (gamepad1.dpad_right == true && turningAround == false) {
+                //leftDrive_1.setPower(speed * .8);
                 //leftDrive_2.setPower(-0.8);
-                rightDrive_1.setPower(-speed*.8);
+                //rightDrive_1.setPower(-speed * .8);
                 //rightDrive_2.setPower(0.8);
             }
 
-            int distanceEquation = (int)sensorRange.getDistance(DistanceUnit.CM);
+            int distanceEquation = (int) sensorRange.getDistance(DistanceUnit.CM);
             colorSensor.enableLed(false);
-            if(distanceEquation > 0) {
+            if (distanceEquation > 0) {
                 colorSensor.enableLed(true);
 
-                if((colorSensor.red()>=115 && colorSensor.red()<=240) &&
-                   (colorSensor.blue()>=110 && colorSensor.blue()<=135) &&
-                   (colorSensor.green()>=215 && colorSensor.green()<=400)){
-                mGapMS = getSleepDurationMS(distanceEquation);
-                if(System.currentTimeMillis()>(mLastBeepMS+mGapMS)) {
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
-                    sleep(distanceEquation * distanceEquation / 80);
-                   toneG.stopTone();
-                    mLastBeepMS = System.currentTimeMillis();
-                }
+                if ((colorSensor.red() >= 115 && colorSensor.red() <= 240) &&
+                        (colorSensor.blue() >= 110 && colorSensor.blue() <= 135) &&
+                        (colorSensor.green() >= 215 && colorSensor.green() <= 400)) {
+                    mGapMS = getSleepDurationMS(distanceEquation);
+                    if (System.currentTimeMillis() > (mLastBeepMS + mGapMS)) {
+                        toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
+                        sleep(distanceEquation * distanceEquation / 80);
+                        toneG.stopTone();
+                        mLastBeepMS = System.currentTimeMillis();
+                    }
                 }
             }
 
             if (gamepad1.b == true && turningAround == false) {
 //                turningAround = true; //refer to lines 93-96
-                leftDrive_1.setPower((turnSpeed) / 1.25);
-                rightDrive_1.setPower((-turnSpeed) / 1.25);
+                //leftDrive_1.setPower((turnSpeed) / 1.25);
+                //rightDrive_1.setPower((-turnSpeed) / 1.25);
                 sleep(625);
 //                turningAround = false;
             }
@@ -267,3 +255,4 @@ public class GamepadThree extends LinearOpMode {
         }
     }
 }
+
